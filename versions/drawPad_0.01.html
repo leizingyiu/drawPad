@@ -1,70 +1,22 @@
 <!-- 
-    Last modified: "2021/10/19 00:47:55"
+    Last modified: "2021/10/18 22:03:00"
  -->
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>drawPad_by_leizingyiu</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
 </head>
 
 <body style="margin:0">
-    <div style="position: absolute; left: 1em;bottom: 1em;font-size: 8px;opacity: 0.6;"
-        onclick="(function(){return void 0;})()">
+    <main></main>
+    <div style="position: absolute; left: 1em;bottom: 1em;font-size: 8px;opacity: 0.6;">
         <p style="user-select: none;"></p>
         <form id='blendModes'>blend mode</form>
     </div>
-    <main></main>
-
     <script src="https://cdn.bootcdn.net/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
     <script>
-        /*page setting*/
-        // 禁止右键菜单
-        document.oncontextmenu = function (event) {
-            event.preventDefault()
-        };
-
-        // 禁止橡皮筋效果
-        document.body.addEventListener('touchmove', function (e) {
-            e.preventDefault();
-        }, { passive: false });
-
-        var $ = document.queryselector;
-        var startY, endY;
-        //记录手指触摸的起点坐标
-        $('body').on('touchstart', function (e) {
-            startY = e.touches[0].pageY;
-        });
-        $('body').on('touchmove', function (e) {
-            endY = e.touches[0].pageY;  //记录手指触摸的移动中的坐标
-            //手指下滑，页面到达顶端不能继续下滑
-            if (endY > startY && $(window).scrollTop() <= 0) {
-                e.preventDefault();
-            }
-            //手指上滑，页面到达底部能继续上滑
-            if (endY < startY && window.scrollY +
-                window.innerHeight >= $('body').scrollHeight) {
-                e.preventDefault();
-            }
-        })
-
-
-
-        //禁用页面前进后退
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
-
-
-    </script>
-    <script>
-        /*page loading*/
         var blendModes = {
             ADD: "ADD",
             BLEND: "BLEND",
@@ -94,7 +46,9 @@
             cblend = e.target.value;
         });
 
-
+        document.oncontextmenu = function (event) {
+            event.preventDefault()
+        };
 
         var cV = 196;
         var c1 = [255, 255, 255],
@@ -112,13 +66,6 @@
 
         function draw() {
 
-            backstage();
-
-            drawing();
-
-        }
-
-        function backstage(params) {
             if (keyIsDown(219)) {
                 strokeWeightChanging(-1);
             }
@@ -137,12 +84,9 @@
                 c2 = [cV, cV, cV];
                 strokeWeightChanging(0)
             }
-        }
 
-        function drawing() {
-            
+
             strokeWeight(brushWeight);
-            
             if (mouseIsPressed) {
                 if (mouseButton === LEFT) {
                     stroke(...c2);
@@ -157,7 +101,6 @@
                 }
                 beforeX = mouseX;
                 beforeY = mouseY;
-
             } else {
                 beforeX = undefined;
                 beforeY = undefined;
