@@ -1,0 +1,28 @@
+<div id="box"></div>
+<style>
+    #box {
+        width: 100%;
+        height: 100%;
+
+    }
+</style>
+<script>
+    const box = document.getElementById('box');
+    let isPointerDown = false;
+    box.addEventListener('pointerdown', function (e) {
+        isPointerDown = true;
+    });
+    box.addEventListener('pointermove', function (e) {
+        box.setPointerCapture(e.pointerId);
+        if (isPointerDown) {
+            console.log(e);
+            // todo
+        }
+    });
+    box.addEventListener('pointerup', function (e) {
+        isPointerDown = false;
+    });
+    box.addEventListener('pointercancel', function (e) {
+        isPointerDown = false;
+    });
+</script>
