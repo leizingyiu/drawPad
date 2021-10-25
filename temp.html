@@ -1,0 +1,32 @@
+<div id="box"></div>
+<style>
+    #box {
+        width: 100%;
+        height: 100%;
+
+    }
+</style>
+<script>
+    const box = document.getElementById('box');
+    let isPointerDown = false;
+    box.addEventListener('pointerdown', function (e) {
+        isPointerDown = true;
+        console.log('pointerdown');
+    });
+    box.addEventListener('pointermove', function (e) {
+        // console.log('pointermove');
+        box.setPointerCapture(e.pointerId);
+        if (isPointerDown) {
+            console.log(e);
+            // todo
+        }
+    });
+    box.addEventListener('pointerup', function (e) {
+        console.log('pointerup');
+        isPointerDown = false;
+    });
+    box.addEventListener('pointercancel', function (e) {
+        console.log('pointercancel');
+        // isPointerDown = false;
+    });
+</script>
