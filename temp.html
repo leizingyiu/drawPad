@@ -11,8 +11,10 @@
     let isPointerDown = false;
     box.addEventListener('pointerdown', function (e) {
         isPointerDown = true;
+        console.log('pointerdown');
     });
     box.addEventListener('pointermove', function (e) {
+        // console.log('pointermove');
         box.setPointerCapture(e.pointerId);
         if (isPointerDown) {
             console.log(e);
@@ -20,9 +22,11 @@
         }
     });
     box.addEventListener('pointerup', function (e) {
+        console.log('pointerup');
         isPointerDown = false;
     });
     box.addEventListener('pointercancel', function (e) {
-        isPointerDown = false;
+        console.log('pointercancel');
+        // isPointerDown = false;
     });
 </script>
